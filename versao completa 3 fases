@@ -1,0 +1,112 @@
+#include <stdio.h>
+
+typedef struct {
+    char codigo[4]; // Código da cidade (ex: A01)
+    unsigned long int populacao;
+    float area;
+    float pib;
+    int pontos_turisticos;
+    float densidade_populacional;
+    float pib_per_capita;
+    float super_poder;
+} Carta;
+
+// Função para cadastrar uma carta
+void cadastrarCarta(Carta *carta) {
+    printf("Digite o código da cidade (Ex: A01): ");
+    scanf("%s", carta->codigo);
+    
+    printf("Digite a população: ");
+    scanf("%lu", &carta->populacao);
+    
+    printf("Digite a área (km²): ");
+    scanf("%f", &carta->area);
+    
+    printf("Digite o PIB (em bilhões): ");
+    scanf("%f", &carta->pib);
+    
+    printf("Digite o número de pontos turísticos: ");
+    scanf("%d", &carta->pontos_turisticos);
+    
+    // Cálculo dos atributos adicionais (nível Aventureiro)
+    carta->densidade_populacional = carta->populacao / carta->area;
+    carta->pib_per_capita = carta->pib / carta->populacao;
+    
+    // Cálculo do Super Poder (nível Mestre)
+    carta->super_poder = carta->populacao + carta->area + carta->pib + carta->pontos_turisticos + (1 / carta->densidade_populacional);
+}
+
+// Função para exibir os dados de uma carta
+void exibirCarta(Carta carta) {
+    printf("\nCódigo: %s\n", carta.codigo);
+    printf("População: %lu\n", carta.populacao);
+    printf("Área: %.2f km²\n", carta.area);
+    printf("PIB: %.2f bilhões\n", carta.pib);
+    printf("Pontos turísticos: %d\n", carta.pontos_turisticos);
+    printf("Densidade Populacional: %.2f habitantes/km²\n", carta.densidade_populacional);
+    printf("PIB per Capita: %.2f\n", carta.pib_per_capita);
+    printf("Super Poder: %.2f\n", carta.super_poder);
+}
+
+// Função para comparar duas cartas
+void compararCartas(Carta c1, Carta c2) {
+    printf("\nResultados da comparação:\n");
+
+    printf("População: %d\n", c1.populacao > c2.populacao ? 1 : 0);
+    printf("Área: %d\n", c1.area > c2.area ? 1 : 0);
+    printf("PIB: %d\n", c1.pib > c2.pib ? 1 : 0);
+    printf("Pontos turísticos: %d\n", c1.pontos_turisticos > c2.pontos_turisticos ? 1 : 0);
+    printf("Densidade Populacional (menor vence): %d\n", c1.densidade_populacional < c2.densidade_populacional ? 1 : 0);
+    printf("PIB per Capita: %d\n", c1.pib_per_capita > c2.pib_per_capita ? 1 : 0);
+    printf("Super Poder: %d\n", c1.super_poder > c2.super_poder ? 1 : 0);
+}
+
+int main() {
+    Carta carta1, carta2;
+
+    printf("Cadastro da primeira carta:\n");
+    cadastrarCarta(&carta1);
+    
+    printf("\nCadastro da segunda carta:\n");
+    cadastrarCarta(&carta2);
+    
+    printf("\nExibindo cartas cadastradas...\n");
+    exibirCarta(carta1);
+    exibirCarta(carta2);
+    
+    printf("\nComparação das cartas:\n");
+    compararCartas(carta1, carta2);
+
+    return 0;
+}
+
+🚀 Explicação do Código
+Estrutura struct Carta: Representa cada carta com seus atributos.
+
+Função cadastrarCarta:
+
+Recebe os dados via terminal.
+
+Calcula Densidade Populacional e PIB per Capita.
+
+Calcula o Super Poder somando os atributos e invertendo a densidade populacional.
+
+Função exibirCarta: Mostra os dados de cada carta formatadamente.
+
+Função compararCartas:
+
+Compara os atributos das cartas e determina os vencedores.
+
+Para Densidade Populacional, o menor valor vence.
+
+Para os demais atributos, o maior valor vence.
+
+main():
+
+Cria duas cartas.
+
+Faz o cadastro das cartas.
+
+Exibe as informações das cartas cadastradas.
+
+Realiza a comparação entre as cartas.
